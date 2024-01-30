@@ -1,0 +1,34 @@
+create database Trader;
+use Trader;
+create table User(UserID varchar (10) not null primary key,
+Password varchar(20) not null,
+FName varchar (20) not null,
+LName varchar (20) not null,
+DOB date not null,
+Email varchar(50) not null,
+Budget varchar(40) not null);
+create table Card(Card_num varchar(16) not null primary key,
+UserID varchar (10) not null,
+CVV varchar(3) not null,
+EXP_DATE date not null,
+foreign key (UserID) references User(UserID));
+create table Crypto(CryptoID varchar (10) not null primary key,
+CName varchar (20) not null,
+Symbol varchar(5) not null,
+Price varchar(20) not null);
+create table Wallet(WalletID varchar(15) not null primary key,
+UserID varchar (10) not null,
+CryptoID varchar (10) not null,
+Ammount varchar(15),
+foreign key (UserID) references User(UserID),
+foreign key (CryptoID) references Crypto(CryptoID));
+create table Transactions(TransactionID varchar (10) not null primary key,
+UserID varchar (10) not null,
+WalletID varchar (15) not null,
+CryptoID varchar (10) not null,
+DOT varchar(30) not null,
+Amount int,
+Value varchar(30) not null,
+foreign key (UserId) references User(UserID),
+foreign key (WalletID) references Wallet(WalletID),
+foreign key (CryptoID) references Crypto(CryptoID));
